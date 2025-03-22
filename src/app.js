@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import { routes as shortenRoutes } from "./router.js";
+import { shortenRoutes } from "./router.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 3033;

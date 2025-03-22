@@ -1,18 +1,5 @@
 import { nanoid } from "nanoid";
-
-export const shorten = async (req, res) => {
-  const { url } = req.body;
-  console.log(url);
-  if (!url || !isValidUrl(url)) {
-    return res.status(400).json({ error: "Invalid URL provided" });
-  }
-
-  const BASE_URL = process.env.BASE_URL;
-  const id = nanoid(6);
-  const shortUrl = `${BASE_URL}/${id}`;
-
-  res.status(201).json({ shortUrl });
-};
+import { saveUrl } from "../models/urlModel.js";
 
 function isValidUrl(url) {
   try {
@@ -22,3 +9,17 @@ function isValidUrl(url) {
     return false;
   }
 }
+
+export const shorten = async (req, res) => {
+  const { url } = req.body;
+  if (!url || !isValidUrl(url)) {
+    return res.status(400).json({ error: "Invalid URL provided" });
+  }
+
+  const BASE_URL = process.env.BASE_URL;
+  const id = nanoid(6);
+  const shortUrl = `${BASE_URL}/${id}`;
+  await saveUrl(BASE_URL, id);
+
+  res.status(201).json({ shortUrl });
+};
