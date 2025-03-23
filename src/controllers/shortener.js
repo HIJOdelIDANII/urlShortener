@@ -19,7 +19,7 @@ export const shorten = async (req, res) => {
   const BASE_URL = process.env.BASE_URL;
   const id = nanoid(6);
   const shortUrl = `${BASE_URL}/${id}`;
-  await saveUrl(BASE_URL, id);
+  await saveUrl(url, id);
 
   res.status(201).json({ shortUrl });
 };
