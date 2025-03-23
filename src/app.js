@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 });
 
 export function start() {
-  app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Listening on http://0.0.0.0:${PORT}`);
   });
 }
