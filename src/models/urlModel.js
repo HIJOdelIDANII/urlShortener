@@ -21,3 +21,17 @@ export async function originalUrl(id) {
     throw error;
   }
 }
+export async function addCount(id){
+    try {
+        const [rows] = await pool.query(
+            `UPDATE urls
+            SET click_count = click_count + 1
+            WHERE id = ?`,
+          [id]
+        );
+        return rows.length ? rows[0].original_url : null;
+      } catch (error) {
+        console.error("Error fetching original URL:", error);
+        throw error;
+      }
+}
